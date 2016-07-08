@@ -75,7 +75,6 @@ def sort_by_cohort(filename):
 
     return all_students
 
-print sort_by_cohort('cohort_data.txt')
 
 
 def students_by_house(filename):
@@ -108,9 +107,49 @@ def students_by_house(filename):
     tas = []
     instructors = []
 
-    # Code goes here
+    #open file
+    student_list = open(filename)
+    
+    #for loop to iterate over student list
+    for line in student_list:
+        student_info = line.rstrip().split("|")
+        student_name = student_info[1]
+
+        #if statement to write student names to lists based on cohort
+        if student_info[2] == "Gryffindor":
+            gryffindor.append(student_name)
+        elif student_info[2] == "Hufflepuff":
+            hufflepuff.append(student_name)
+        elif student_info[2] == "Slytherin":
+            slytherin.append(student_name)
+        elif student_info[2] == "Dumbledore's Army":
+            dumbledores_army.append(student_name)
+        elif student_info[2] == "Order of the Phoenix":
+            order_of_the_phoenix.append(student_name) 
+        elif student_info[2] == "Ravenclaw":
+            ravenclaw.append(student_name)           
+        elif student_info[4] == "TA":
+            tas.append(student_name)
+        elif student_info[4] == "I":
+            instructors.append(student_name)    
+
+    #sort cohort lists alphabetically by first name
+    gryffindor.sort()
+    hufflepuff.sort()
+    slytherin.sort()
+    dumbledores_army.sort()
+    order_of_the_phoenix.sort()
+    ravenclaw.sort()
+    tas.sort()
+    instructors.sort()
+
+    #add sorted lists to all_students list
+    all_students = [gryffindor, hufflepuff, slytherin, dumbledores_army, order_of_the_phoenix, ravenclaw, tas, instructors]
+
+    student_list.close()
 
     return all_students
+print students_by_house("cohort_data.txt")    
 
 
 def all_students_tuple_list(filename):
