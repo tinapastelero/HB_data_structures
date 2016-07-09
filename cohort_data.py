@@ -149,11 +149,9 @@ def students_by_house(filename):
     student_list.close()
 
     return all_students
-print students_by_house("cohort_data.txt")    
-
 
 def all_students_tuple_list(filename):
-    """TODO: Create a list of tuples of student data.
+    """TODO: Create a list of tuples of data student.
 
     Iterates over the data to create a big list of tuples that individually
     hold all the data for each person. (full_name, house, advisor, cohort)
@@ -166,9 +164,21 @@ def all_students_tuple_list(filename):
 
     student_list = []
 
-    # Code goes here
-
+    #open file
+    student_working_list = open(filename)
+    
+    #for loop to open file, convert each line to a list, and convert each list to a tuple
+    for line in student_working_list:
+        student_info = line.rstrip().split("|")
+        student_name = student_info[0] + " " + student_info[1]
+        student_info2 = []
+        student_info2.append(student_name)
+        student_info2.extend(student_info[2:])
+        student_list.append(tuple(student_info2))    
+    
     return student_list
+
+print all_students_tuple_list('cohort_data.txt')
 
 
 def find_cohort_by_student_name(student_list):
